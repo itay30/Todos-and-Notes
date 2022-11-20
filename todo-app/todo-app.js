@@ -1,18 +1,18 @@
 const todos = [{
     text: 'go eat',
-    completed: false
+    completed: true
 }, {
     text: 'go run',
     completed: false
 }, {
     text: 'do homework',
-    completed: false
+    completed: true
 }, {
     text: 'go sleep',
     completed: false
 }, {
     text: 'do cleanings',
-    completed: false
+    completed: true
 }]
 
 const todosFilters = {
@@ -27,12 +27,7 @@ const rendertodos = function(todos, todosFilters) {
     })
 
     filteredTodos = filteredTodos.filter(function(todo) {
-        // return !filters.hideCompleted
-        if (todosFilters.hideCompleted) {
-            return !todo.completed
-        } else {
-            return true
-        }
+        return !todosFilters.hideCompleted || !todo.completed
     });
 
     const incompleteTodos = filteredTodos.filter(function(todo) {
@@ -71,6 +66,6 @@ document.querySelector("#new-todo").addEventListener('submit', function(e) {
 })
 
 document.querySelector("#hide-completed").addEventListener('change', function(e) {
-    filters.hideCompleted = e.target.checked
-    rendertodos(todos, filters)
+    todosFilters.hideCompleted = e.target.checked
+    rendertodos(todos, todosFilters)
 })
